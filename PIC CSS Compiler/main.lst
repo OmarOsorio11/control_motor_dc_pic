@@ -1,0 +1,107 @@
+CCS PCM C Compiler, Version 5.015, 5967               30-mar.-21 13:32
+
+               Filename:   F:\Universidad\PIC CSS COMPILER AND PROTEUS\Programacion Y control de perifericos\Proyecto numero  (24)\PIC CSS Compiler\main.lst
+
+               ROM used:   46 words (1%)
+                           Largest free fragment is 2048
+               RAM used:   5 (1%) at main() level
+                           16 (4%) worst case
+               Stack used: 0 locations
+               Stack size: 16
+
+*
+0000:  MOVLP  00
+0001:  GOTO   003
+0002:  NOP
+.................... #include <main.h> 
+.................... #include <16F1827.h> 
+.................... //////////// Standard Header file for the PIC16F1827 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2013 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F1827 
+....................  
+.................... #list 
+....................  
+....................  
+.................... #FUSES NOWDT                    //No Watch Dog Timer 
+....................  
+.................... #use delay(crystal=4MHz) 
+....................  
+....................  
+.................... #use standard_io(a) 
+.................... #use standard_io(b) 
+.................... void main() 
+0003:  MOVLB  03
+0004:  CLRF   0C
+0005:  CLRF   0D
+0006:  MOVLB  02
+0007:  CLRF   12
+0008:  CLRF   11
+0009:  CLRF   14
+000A:  CLRF   13
+.................... { 
+....................    set_tris_b(0b11111111); 
+000B:  MOVLW  FF
+000C:  TRIS   6
+....................    set_tris_b(0b00000000); 
+000D:  MOVLW  00
+000E:  TRIS   6
+....................    output_high(PIN_B2); 
+000F:  MOVLB  01
+0010:  BCF    0D.2
+0011:  MOVLB  02
+0012:  BSF    0D.2
+....................    while(TRUE) 
+....................    {      
+....................       if (input_state(PIN_A0)==1){ 
+0013:  MOVLB  00
+0014:  BTFSS  0C.0
+0015:  GOTO   01C
+....................          output_high(PIN_B0); 
+0016:  MOVLB  01
+0017:  BCF    0D.0
+0018:  MOVLB  02
+0019:  BSF    0D.0
+....................       } 
+001A:  GOTO   02C
+001B:  MOVLB  00
+....................       else if (input_state(PIN_A1)==1) 
+001C:  BTFSS  0C.1
+001D:  GOTO   024
+....................       { 
+....................          output_high(PIN_B1); 
+001E:  MOVLB  01
+001F:  BCF    0D.1
+0020:  MOVLB  02
+0021:  BSF    0D.1
+....................       }  
+0022:  GOTO   02C
+0023:  MOVLB  00
+....................       else     
+....................       { 
+....................          output_low(PIN_B0); 
+0024:  MOVLB  01
+0025:  BCF    0D.0
+0026:  MOVLB  02
+0027:  BCF    0D.0
+....................          output_low(PIN_B1); 
+0028:  MOVLB  01
+0029:  BCF    0D.1
+002A:  MOVLB  02
+002B:  BCF    0D.1
+....................       }   
+002C:  GOTO   013
+....................    } 
+.................... } 
+002D:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3FC1   XT NOWDT PUT MCLR NOPROTECT NOCPD BROWNOUT NOCLKOUT IESO FCMEN
+   Word  2: 1EFF   NOWRT PLL_SW STVREN BORV19 NODEBUG NOLVP
